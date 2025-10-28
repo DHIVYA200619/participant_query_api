@@ -2,3 +2,4 @@ fastapi
 uvicorn
 sentence-transformers==2.2.2
 numpy
+huggingface_hub==0.13.3
