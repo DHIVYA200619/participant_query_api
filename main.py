@@ -5,7 +5,6 @@ import numpy as np
 
 app = FastAPI()
 
-# Define request & response data formats
 class QueryRequest(BaseModel):
     query: str
     top_k: int
@@ -14,20 +13,19 @@ class QueryResponse(BaseModel):
     answer: str
     contexts: list[str]
 
-# Load a semantic model (lightweight & fast)
-model = SentenceTransformer("all-MiniLM-L6-v2")
+# ✅ Lightweight model for Render free tier (CPU optimized)
+model = SentenceTransformer("paraphrase-MiniLM-L3-v2")
 
-# Example knowledge base (you can expand this)
+# Demo corpus
 documents = [
     "Artificial intelligence simulates human intelligence processes using machines.",
     "Machine learning is a subset of AI that learns from experience.",
     "Deep learning employs neural networks for complex data representations.",
-    "Natural language processing enables human-computer communication.",
+    "Natural language processing enables computers to understand human language.",
     "Computer vision allows machines to interpret visual information from the world.",
     "Reinforcement learning uses rewards and punishments to teach models optimal actions."
 ]
 
-# Encode corpus once
 corpus_embeddings = model.encode(documents, convert_to_tensor=True)
 
 @app.post("/")
